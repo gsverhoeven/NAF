@@ -10,14 +10,6 @@ import session
 LOG = logging.getLogger("glicko")
 
 
-def load_file(filename):
-    file = pathlib.Path(filename)
-    if not file.is_file():
-        LOG.debug("File %s not found", filename)
-        return False
-    return file
-
-
 def upload_file(csv_file, url, secret=False):
     LOG.debug('Connecting to %s', url)
     header = session.build_header()
