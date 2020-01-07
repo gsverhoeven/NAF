@@ -1,5 +1,6 @@
 .ipynb_checkpoints
 .snakemake
+upload.yml
 scripts/__pycache__/
 output/
 data/
