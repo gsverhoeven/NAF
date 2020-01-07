@@ -23,8 +23,17 @@ def upload_file(csv_file, url, secret=False):
         LOG.error('Problem uploading file %s %s', response.status_code, response.reason)
         LOG.debug('%s', response.text)
         return False
+    if "Done" not in response.text:
+        LOG.error('Server returned %s, but a confirmation of the upload was not found in response', response.status_code)
+        LOG.error(response.text)
+        return False
+    if "SQLSTATE" in response.text:
+        LOG.warning('Server returned %s and Done. Found SQLSTATE in response', response.status_code)
+        LOG.warning(response.text)
+        return True
+
     LOG.info('Upload OK!')
-    return response.text
+    return True
 
 
 def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import.php'):
@@ -37,11 +46,6 @@ def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import
     response = upload_file(file, url, secret)
     if not response:
         return False
-
-    LOG.info('Server responded')
-    LOG.info(response)
-
-    LOG.info('Done!')
     return True
 
 
