@@ -17,7 +17,7 @@ def upload_file(csv_file, url, secret=False):
     if secret:
         form['top_secret'] = secret
 
-    LOG.info('Uploading file')
+    LOG.debug('Uploading file')
     response = requests.post(url, files={'csv_file': csv_file}, headers=header, data=form)
     if not response:
         LOG.error('Problem uploading file %s %s', response.status_code, response.reason)
@@ -37,7 +37,7 @@ def upload_file(csv_file, url, secret=False):
 
 
 def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import.php'):
-    LOG.debug('Uploading %s to %s', file.name, url)
+    LOG.info('Uploading %s to %s', file.name, url)
 
     if not file:
         LOG.error('Error loading file %s', file.name)
@@ -53,7 +53,7 @@ def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import
 
 def main():
     log_format = "[%(levelname)s:%(filename)s:%(lineno)s - %(funcName)20s ] %(message)s"
-    logging.basicConfig(level=logging.INFO if "--debug" not in sys.argv else logging.DEBUG, format=log_format)
+    logging.basicConfig(level=logging.WARNING if "--debug" not in sys.argv else logging.DEBUG, format=log_format)
 
     config = {'target_url': 'http://example.com/ranks.php',
               'top_secret': 'no secret'}
@@ -73,6 +73,6 @@ def main():
     return upload_rank(file=arguments.infile, url=arguments.target_url, secret=arguments.top_secret)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     if not main():
         sys.exit(74)
