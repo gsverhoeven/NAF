@@ -5,14 +5,27 @@ import pathlib
 import yaml
 import logging
 
-import session
-
 LOG = logging.getLogger("glicko")
+
+USER_AGENT='Mozilla/5.0 (X11; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/72.0'
+ACCEPT='text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+
+
+def build_header():
+    return {'Accept-Language': 'en-US,en;q=0.5',
+            'Accept': ACCEPT,
+            'Referer': 'https://member.thenaf.net/',
+            'Connection': 'keep-alive',
+            'Host': 'member.thenaf.net',
+            'Origin': 'https://member.thenaf.net/',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'User-Agent': USER_AGENT,
+            'Upgrade-Insecure-Requests': '1'}
 
 
 def upload_file(csv_file, url, secret=False):
     LOG.debug('Connecting to %s', url)
-    header = session.build_header()
+    header = build_header()
     form = {'submit': 'submit'}
     if secret:
         form['top_secret'] = secret
