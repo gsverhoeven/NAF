@@ -66,8 +66,8 @@ def main():
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('--debug', action='store_true')
     arg_parser.add_argument('infile', type=argparse.FileType('r'))
-    arg_parser.add_argument('--target-url', default=config['target_url'], action='store_true')
-    arg_parser.add_argument('--top-secret', default=config['top_secret'], action='store_true')
+    arg_parser.add_argument('--target-url', default=config['target_url'])
+    arg_parser.add_argument('--top-secret', default=config['top_secret'])
 
     arguments = arg_parser.parse_args()
 
