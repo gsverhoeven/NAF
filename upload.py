@@ -24,11 +24,11 @@ def upload_file(csv_file, url, secret=False):
         LOG.debug('%s', response.text)
         return False
     if "Done" not in response.text:
-        LOG.error('Server returned %s, but a confirmation of the upload was not found in response', response.status_code)
+        LOG.error('Server returned %s, but a confirmation of the upload was not found', response.status_code)
         LOG.error(response.text)
         return False
     if "SQLSTATE" in response.text:
-        LOG.warning('Server returned %s and Done. Found SQLSTATE in response', response.status_code)
+        LOG.warning('Server returned %s and Done. Found SQLSTATE. That could be a problem', response.status_code)
         LOG.warning(response.text)
         return True
 
@@ -44,6 +44,8 @@ def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import
         return False
 
     response = upload_file(file, url, secret)
+    file.close()
+
     if not response:
         return False
     return True
@@ -68,8 +70,9 @@ def main():
     arguments = arg_parser.parse_args()
 
     LOG.debug("Using arguments %s", arguments)
-    upload_rank(file=arguments.infile, url=arguments.target_url, secret=arguments.top_secret)
+    return upload_rank(file=arguments.infile, url=arguments.target_url, secret=arguments.top_secret)
 
 
 if __name__=='__main__':
-    main()
+    if not main():
+        sys.exit(74)
