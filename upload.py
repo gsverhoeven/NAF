@@ -76,7 +76,7 @@ def main():
 
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('--debug', action='store_true')
-    arg_parser.add_argument('infile', type=argparse.FileType('r'))
+    arg_parser.add_argument('infile', default=sys.stdin, nargs='?', type=argparse.FileType('r'))
     arg_parser.add_argument('--target-url', default=config['target_url'])
     arg_parser.add_argument('--top-secret', default=config['top_secret'])
 
