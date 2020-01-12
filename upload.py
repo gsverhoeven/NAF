@@ -23,12 +23,14 @@ def build_header():
             'Upgrade-Insecure-Requests': '1'}
 
 
-def upload_file(csv_file, url, secret=False):
+def upload_file(csv_file, url, secret=False, target_table='race'):
     LOG.debug('Connecting to %s', url)
     header = build_header()
     form = {'submit': 'submit'}
     if secret:
         form['top_secret'] = secret
+    if target_table:
+        form['target_table'] = target_table
 
     LOG.debug('Uploading file')
     response = requests.post(url, files={'csv_file': csv_file}, headers=header, data=form)
@@ -49,14 +51,14 @@ def upload_file(csv_file, url, secret=False):
     return True
 
 
-def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import.php'):
+def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import.php', target_table='race'):
     LOG.info('Uploading %s to %s', file.name, url)
 
     if not file:
         LOG.error('Error loading file %s', file.name)
         return False
 
-    response = upload_file(file, url, secret)
+    response = upload_file(file, url, secret, target_table)
     file.close()
 
     if not response:
@@ -78,12 +80,13 @@ def main():
     arg_parser.add_argument('--debug', action='store_true')
     arg_parser.add_argument('infile', default=sys.stdin, nargs='?', type=argparse.FileType('r'))
     arg_parser.add_argument('--target-url', default=config['target_url'])
+    arg_parser.add_argument('--target-table', default=config['target_table'])
     arg_parser.add_argument('--top-secret', default=config['top_secret'])
 
     arguments = arg_parser.parse_args()
 
     LOG.debug("Using arguments %s", arguments)
-    return upload_rank(file=arguments.infile, url=arguments.target_url, secret=arguments.top_secret)
+    return upload_rank(file=arguments.infile, url=arguments.target_url, secret=arguments.top_secret, target_table=arguments.target_table)
 
 
 if __name__ == '__main__':
