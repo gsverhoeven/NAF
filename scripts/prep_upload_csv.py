@@ -65,12 +65,12 @@ df["naf_number"] = df.naf_number.fillna(0).astype("int")
 
 # create URL
 df["coachname"] = df.apply(lambda y: url_path.format(nafnum=y.naf_number, value=y.coach), axis=1)
-core_cols = ["rank", "race_rank", "coachname", "naf_number", "race", "nation", "rating"]
+core_cols = ["rank", "race_rank", "naf_name", "naf_number", "race", "nation", "rating"]
 extra_cols = snakemake.params.extra_cols
 printcols = core_cols + extra_cols
 
 if snakemake.params.globalmode:
-    dfq = df.sort_values("rating", ascending=False)[printcols[2:]]
+    dfq = df.sort_values("rating", ascending=False)[printcols]
     g = dfq.groupby("nation")
     for nat, _df in g:
       _df.reset_index(drop=True).to_csv(snakemake.output.upload.replace("csv", nat + ".csv"), index=True, header=True, float_format="%.2f", quoting=2)
