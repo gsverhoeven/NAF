@@ -8,5 +8,5 @@ phi_active: 100
 global_mode: False
 global_excl: []
 update_freq: '1M'
-extra_cols: ['phi', 'decay', 'change']
-cutoff: 31.10.2019
+extra_cols: ['phi', 'decay', 'change', 'qrank', 'old_rank', 'qrace_rank', 'old_race_rank', 'rank_change']
+cutoff: today
