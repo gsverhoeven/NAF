@@ -51,7 +51,7 @@ def upload_file(csv_file, url, secret=False, target_table='race'):
     return True
 
 
-def upload_rank(file, secret=False, url='https://member.thenaf.net/glicko/import.php', target_table='race'):
+def upload_rank(file, secret=False, url='https://127.0.0.1:8080/glicko/import.php', target_table='race'):
     LOG.info('Uploading %s to %s', file.name, url)
 
     if not file:
