@@ -12,13 +12,13 @@ rule dl_gdata:
   output:
     csv="data/all_matches.csv.gz"
   shell:
-    "curl -L www.dropbox.com/s/t8cq8zixe99fl8f/all_matches.csv?dl=1 | gzip > {output}"
+    "curl -L {config[all_matches_url]} | gzip > {output}"
 
 rule dl_pdata:
   output:
     csv="data/all_coaches.csv.gz"
   shell:
-    "curl -L https://www.dropbox.com/s/xus9dhoytlhofqs/all_coaches.csv?dl=1 | gzip > {output}"
+    "curl -L {config[all_coaches_url]} | gzip > {output}"
 
 rule process_data:
   input:
