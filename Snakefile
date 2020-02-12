@@ -9,16 +9,20 @@ from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 HTTP = HTTPRemoteProvider()
 
 rule dl_gdata:
+  params:
+    all_matches_url=config.get('all_matches_url', 'http://ghoulhq.com/nafdata/export/all_matches.csv')
   output:
     csv="data/all_matches.csv.gz"
   shell:
-    "curl -L {config[all_matches_url]} | gzip > {output}"
+    "curl -L {params.all_matches_url} | gzip > {output}"
 
 rule dl_pdata:
+  params:
+    all_coaches_url=config.get('all_coaches_url', 'http://ghoulhq.com/nafdata/export/all_coaches.csv')
   output:
     csv="data/all_coaches.csv.gz"
   shell:
-    "curl -L {config[all_coaches_url]} | gzip > {output}"
+    "curl -L {params.all_coaches_url} | gzip > {output}"
 
 rule process_data:
   input:
