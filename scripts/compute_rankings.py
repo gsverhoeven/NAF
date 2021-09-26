@@ -14,7 +14,7 @@ def cleanup(x):
 def read_hdf5(hf, ix, prefix):
 
     coaches = list(hf["coaches"].keys())
-    race_ids = hf["race_ids"][:].astype("<U16")
+    race_ids = hf["race_ids"][:].astype("<U19")
 
     # create 2 data frames, coach by race id
     df_mu = pd.DataFrame(index=coaches, columns=race_ids)
