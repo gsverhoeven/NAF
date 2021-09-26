@@ -60,6 +60,8 @@ for i, (hid, aid) in enumerate(zip(naf_data.home_coach.values, naf_data.away_coa
                 keep[i] = False
 
 keep = keep & (naf_data.variant == 'Blood Bowl').values
+if not any(keep):
+    raise RuntimeWarning('No matches kept after variant exclusion')
 
 if snakemake.params.globalmode:
     print("In global mode")
