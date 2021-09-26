@@ -1,5 +1,5 @@
 import pandas as pd
-import glicko2 as Glicko
+import glicko2.glicko2
 import numpy as np 
 import h5py
 from player import Player
@@ -11,7 +11,7 @@ PHI = snakemake.params.phi      # Starting rating deviation
 SIGMA = snakemake.params.sigma  # starting volatility
 UPDATE_FREQ = snakemake.params.update_freq
 
-glck = Glicko.Glicko2(mu=MU, tau=TAU, phi=PHI, sigma=SIGMA)
+glck = glicko2.glicko2.Glicko2(mu=MU, tau=TAU, phi=PHI, sigma=SIGMA)
 
 rank_data = pd.read_table(snakemake.input.txt, index_col=0, parse_dates=[0])
 rank_data.sort_index(inplace=True)
