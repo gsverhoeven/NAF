@@ -86,7 +86,7 @@ datestrings = np.array([x.strftime('%Y-%m-%d') for x in rank_periods[::-1]], dty
 
 with h5py.File(snakemake.output.hdf5, "w") as hf:
     hf.create_dataset("date", data=datestrings)
-    hf.create_dataset("race_ids", data=np.array(uniq_races, dtype="|S16"))
+    hf.create_dataset("race_ids", data=np.array(uniq_races, dtype="|S19"))
     player_g = hf.create_group("coaches")
 
     for key, value in ranking_data.items():
