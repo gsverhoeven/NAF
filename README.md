@@ -14,7 +14,7 @@ This repo is also set up with `binder`, allowing anyone to set up an interactive
 
 Once conda and the enviroment is set up, the command `snakemake` should create all the necessary files. You can read more about snakemake (here)[]. The main parameters can be changed in the `config.yml` file.
 
-Alternate config `snakemake --configfile config_global.yml`
+Alternate config `snakemake --configfile config_global.yml --cores 1`
 
 
 ## Output
