@@ -59,7 +59,7 @@ for i, (hid, aid) in enumerate(zip(naf_data.home_coach.values, naf_data.away_coa
                     excluded_ids.append(xid)
                 keep[i] = False
 
-keep = keep & (naf_data.variant == 'Blood Bowl').values
+keep = keep & (naf_data.variant == 'Blood Bowl 2020').values
 if not any(keep):
     raise RuntimeWarning('No matches kept after variant exclusion')
 
