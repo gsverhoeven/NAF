@@ -10,4 +10,4 @@ global_mode: True
 global_excl: ['Goblin', 'Halfling', 'Ogre', 'Underworld Denizens', 'Snotling']
 extra_cols: ['phi', 'decay', 'change', 'qrank', 'old_rank', 'qrace_rank', 'old_race_rank', 'rank_change']
 cutoff: today
-time_period: "5y"
+time_period: "260W"
