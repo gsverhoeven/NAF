@@ -7,7 +7,8 @@ phi_limit: 250
 phi_active: 250
 update_freq: '2W'
 global_mode: True
-global_excl: ['Goblin', 'Halfling', 'Ogre', 'Underworld Denizens', 'Snotling']
+global_excl: ['Goblin', 'Halfling', 'Ogre', 'Snotling']
 extra_cols: ['phi', 'decay', 'change', 'qrank', 'old_rank', 'qrace_rank', 'old_race_rank', 'rank_change']
 cutoff: today
 time_period: "260W"
+
